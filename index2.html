@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Netflix Clone</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="header-container">
+      <div class="logo">
+        <div class="netflix-icon"></div>
+        <span>NETFLIX</span>
+      </div>
+      
+      <nav class="main-nav">
+        <a href="#browse">Home</a>
+        <a href="#browse">TV Shows</a>
+        <a href="#browse">Movies</a>
+        <a href="#browse">New & Popular</a>
+        <a href="#browse">My List</a>
+      </nav>
+      
+      <div class="header-right">
+        <div class="language-selector">
+          <select>
+            <option>English</option>
+            <option>Urdu</option>
+          </select>
+        </div>
+        <button class="signin-button">Sign In</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Unlimited movies, TV shows, and more</h1>
+      <p class="hero-subtitle">Watch anywhere. Cancel anytime.</p>
+      <p class="hero-text">Ready to watch? Enter your email to create or restart your membership.</p>
+      
+      <form class="email-form">
+        <input type="email" placeholder="Email address" required>
+        <button type="submit">Get Started</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="feature">
+    <div class="feature-container">
+      <div class="feature-text">
+        <h2>Enjoy on your TV</h2>
+        <p>Watch on Smart TVs, Playstation, Xbox, Chromecast, Apple TV, Blu-ray players, and more.</p>
+      </div>
+      <div class="feature-image">
+        <img src="https://images.unsplash.com/photo-1497015289639-54688650d173?q=80&w=1935&auto=format&fit=crop" alt="TV">
+      </div>
+    </div>
+  </section>
+
+  <section class="feature reverse">
+    <div class="feature-container">
+      <div class="feature-image">
+        <img src="https://images.unsplash.com/photo-1516979187457-637abb4f9353?q=80&w=1974&auto=format&fit=crop" alt="Download">
+      </div>
+      <div class="feature-text">
+        <h2>Download your shows to watch offline</h2>
+        <p>Save your favorites easily and always have something to watch.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="feature">
+    <div class="feature-container">
+      <div class="feature-text">
+        <h2>Watch everywhere</h2>
+        <p>Stream unlimited movies and TV shows on your phone, tablet, laptop, and TV.</p>
+      </div>
+      <div class="feature-image">
+        <img src="https://images.unsplash.com/photo-1510070009289-b5bc34383727?q=80&w=2070&auto=format&fit=crop" alt="Devices">
+      </div>
+    </div>
+  </section>
+
+  <!-- Shows Section -->
+  <section class="shows" id="browse">
+    <h3>Trending Now</h3>
+    <div class="show-row">
+      <div class="show-card">
+        <img src="https://picsum.photos/id/1011/600/338" alt="Show 1">
+        <div class="show-info">
+          <span class="age-rating">16+</span>
+          <div class="show-buttons">
+            <button>▶ Play</button>
+            <button>ⓘ Info</button>
+          </div>
+        </div>
+      </div>
+      <!-- More show cards... -->
+    </div>
+    
+    <h3>Popular on Netflix</h3>
+    <div class="show-row">
+      <!-- Show cards... -->
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-links">
+      <div class="link-column">
+        <a href="#">FAQ</a>
+        <a href="#">Investor Relations</a>
+        <a href="#">Privacy</a>
+        <a href="#">Speed Test</a>
+      </div>
+      <!-- More link columns... -->
+    </div>
+    <div class="footer-copyright">
+      <p>Netflix Pakistan</p>
+    </div>
+  </footer>
+</body>
+</html>

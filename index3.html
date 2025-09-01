@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Netflix</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #141414;
+        color: #e5e5e5;
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      img {
+        max-width: 100%;
+        display: block;
+      }
+      /* Header */
+      .site-header {
+        width: 100%;
+        background: #000;
+        color: #e50914;
+        padding: 18px 24px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: 10;
+      }
+      .brand {
+        font-weight: bold;
+        font-size: 28px;
+        letter-spacing: 1px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .brand .n {
+        width: 28px;
+        height: 28px;
+        background: #e50914;
+        border-radius: 4px;
+        display: inline-block;
+      }
+      .nav {
+        display: flex;
+        gap: 18px;
+        margin-left: 30px;
+      }
+      .nav a {
+        color: #fff;
+        font-weight: 600;
+        font-size: 14px;
+        opacity: 0.9;
+      }
+      .nav a:hover {
+        opacity: 1;
+      }
+      .header-actions {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .lang-select select {
+        background: #222;
+        color: #fff;
+        border: 1px solid #555;
+        border-radius: 6px;
+        padding: 6px 18px;
+        font-weight: 600;
+      }
+      .signin-btn {
+        background: #e50914;
+        border: none;
+        color: #fff;
+        font-weight: 700;
+        padding: 8px 14px;
+        border-radius: 6px;
+        cursor: pointer;
+      }
+      .signin-btn:hover {
+        background: #b20710;
+      }
+      /* Hero */
+      .hero {
+        min-height: 88vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 120px 24px 80px;
+        background: #000 url("https://images.unsplash.com/photo-1517602302552-471fe67acf66?q=80&w=2070&auto=format&fit=crop") center/cover no-repeat;
+        position: relative;
+      }
+      .hero:after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: rgba(20,20,20,0.7);
+        z-index: 1;
+      }
+      .hero-copy {
+        position: relative;
+        z-index: 2;
+        width: 100%;
+        max-width: 700px;
+      }
+      .hero h1 {
+        font-size: 40px;
+        margin-bottom: 10px;
+        font-weight: bold;
+      }
+      .hero .lead {
+        font-size: 20px;
+        margin-bottom: 18px;
+      }
+      .hero .sub {
+        font-size: 16px;
+        color: #b3b3b3;
+        margin-bottom: 18px;
+      }
+      .cta {
+        display: flex;
+        gap: 10px;
+        max-width: 500px;
+        margin: 0 auto;
+        background: rgba(0,0,0,0.6);
+        border-radius: 10px;
+        padding: 10px;
+        border: 1px solid #333;
+      }
+      .cta input[type="email"] {
+        flex: 1;
+        padding: 12px;
+        border-radius: 6px;
+        border: 1px solid #444;
+        background: #111;
+        color: #fff;
+        font-size: 16px;
+      }
+      .cta-btn {
+        background: #e50914;
+        color: #fff;
+        font-weight: bold;
+        font-size: 16px;
+        border: none;
+        padding: 12px 18px;
+        border-radius: 6px;
+        cursor: pointer;
+      }
+      .cta-btn:hover {
+        background: #b20710;
+      }
+      /* Feature stripes */
+      .stripe {
+        border-top: 8px solid #232323;
+        background: #000;
+        padding: 50px 5vw;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 30px;
+        flex-wrap: wrap;
+      }
+      .stripe:nth-child(even) {
+        flex-direction: row-reverse;
+      }
+      .stripe h2 {
+        font-size: 32px;
+        margin-bottom: 12px;
+      }
+      .stripe p {
+        color: #b3b3b3;
+        font-size: 18px;
+        margin: 0;
+      }
+      .mockup {
+        background: #111;
+        border: 2px solid #333;
+        border-radius: 12px;
+        padding: 10px;
+        width: 320px;
+        max-width: 90vw;
+      }
+      .screen {
+        width: 100%;
+        aspect-ratio: 16/9;
+        border-radius: 8px;
+        background-size: cover;
+        background-position: center;
+      }
+      .screen.one {
+        background-image: url("https://images.unsplash.com/photo-1497015289639-54688650d173?q=80&w=1935&auto=format&fit=crop");
+      }
+      .screen.two {
+        background-image: url("https://images.unsplash.com/photo-1516979187457-637abb4f9353?q=80&w=1974&auto=format&fit=crop");
+      }
+      .screen.three {
+        background-image: url("https://images.unsplash.com/photo-1510070009289-b5bc34383727?q=80&w=2070&auto=format&fit=crop");
+      }
+      /* Browse rows */
+      .browse {
+        border-top: 8px solid #232323;
+        background: #141414;
+        padding: 32px 5vw 64px;
+      }
+      .row {
+        margin-bottom: 22px;
+      }
+      .row h3 {
+        margin-bottom: 10px;
+        font-size: 20px;
+        font-weight: bold;
+      }
+      .cards {
+        display: flex;
+        gap: 10px;
+        overflow-x: auto;
+        padding-bottom: 6px;
+      }
+      .card {
+        background: #222;
+        border-radius: 8px;
+        min-width: 220px;
+        max-width: 220px;
+        aspect-ratio: 16/9;
+        overflow: hidden;
+        position: relative;
+        cursor: pointer;
+        transition: transform 0.2s;
+      }
+      .card:hover {
+        transform: translateY(-4px) scale(1.03);
+        box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+      }
+      .poster {
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+        background-position: center;
+        filter: brightness(0.9);
+      }
+      .meta {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        padding: 10px;
+        background: linear-gradient(180deg,rgba(0,0,0,0) 0,rgba(0,0,0,0.8) 80%);
+        opacity: 0;
+        transition: opacity 0.2s;
+      }
+      .card:hover .meta {
+        opacity: 1;
+      }
+      .badge {
+        display: inline-block;
+        font-size: 12px;
+        padding: 2px 8px;
+        border-radius: 12px;
+        background: rgba(255,255,255,0.12);
+        margin-bottom: 6px;
+      }
+      .actions {
+        display: flex;
+        gap: 8px;
+        margin-top: 4px;
+      }
+      .btn {
+        background: #333;
+        color: #fff;
+        font-size: 12px;
+        padding: 5px 10px;
+        border-radius: 12px;
+        border: none;
+        font-weight: 600;
+      }
+      /* Footer */
+      footer {
+        border-top: 8px solid #232323;
+        background: #000;
+        color: #b3b3b3;
+        padding: 40px 5vw;
+      }
+      .fgrid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 24px;
+        max-width: 1100px;
+      }
+      .fgrid > div {
+        min-width: 160px;
+      }
+      footer a {
+        color: #b3b3b3;
+        font-size: 14px;
+        display: block;
+        margin-bottom: 6px;
+      }
+      .copy {
+        margin-top: 24px;
+        font-size: 13px;
+        color: #777;
+      }
+      /* Responsive */
+      @media (max-width: 900px) {
+        .stripe {
+          flex-direction: column !important;
+          text-align: center;
+        }
+        .mockup {
+          width: 90vw;
+        }
+        .cards {
+          gap: 6px;
+        }
+        .card {
+          min-width: 160px;
+          max-width: 160px;
+        }
+      }
+      @media (max-width: 600px) {
+        .site-header {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 10px;
+        }
+        .nav {
+          margin-left: 0;
+          flex-wrap: wrap;
+        }
+        .hero h1 {
+          font-size: 26px;
+        }
+        .stripe h2 {
+          font-size: 22px;
+        }
+        .mockup {
+          width: 100%;
+        }
+        .card {
+          min-width: 120px;
+          max-width: 120px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="site-header">
+      <a href="#" class="brand" aria-label="Netflix home">
+        <span class="n" aria-hidden="true"></span>
+        <span>NETFLIX</span>
+      </a>
+      <nav class="nav" aria-label="Primary">
+        <a href="#browse">Home</a>
+        <a href="#browse">Series</a>
+        <a href="#browse">Films</a>
+        <a href="#browse">New & Popular</a>
+        <a href="#browse">My List</a>
+      </nav>
+      <div class="header-actions">
+        <label class="lang-select">
+          <select aria-label="Select language">
+            <option>English</option>
+            <option>Urdu</option>
+          </select>
+        </label>
+        <button class="signin-btn" type="button">Sign In</button>
+      </div>
+    </header>
+    <!-- Hero -->
+    <section class="hero" role="banner">
+      <div class="hero-copy">
+        <h1>Unlimited movies, TV shows, and more</h1>
+        <p class="lead">Watch anywhere. Cancel anytime.</p>
+        <p class="sub">
+          Ready to watch? Enter your email to create or restart your membership.
+        </p>
+        <form class="cta" action="#" method="get">
+          <input
+            type="email"
+            name="email"
+            placeholder="Email address"
+            required
+          />
+          <button class="cta-btn" type="submit">Get Started ▸</button>
+        </form>
+      </div>
+    </section>
+    <!-- Feature stripes -->
+    <section class="stripe">
+      <div>
+        <h2>Enjoy on your TV</h2>
+        <p>
+          Watch on Smart TVs, Playstation, Xbox, Chromecast, Apple TV, Blu-ray
+          players, and more.
+        </p>
+      </div>
+      <div class="mockup">
+        <div class="screen one" aria-hidden="true"></div>
+      </div>
+    </section>
+    <section class="stripe">
+      <div class="mockup">
+        <div class="screen two" aria-hidden="true"></div>
+      </div>
+      <div>
+        <h2>Download your shows to watch offline</h2>
+        <p>Save your favorites easily and always have something to watch.</p>
+      </div>
+    </section>
+    <section class="stripe">
+      <div>
+        <h2>Watch everywhere</h2>
+        <p>
+          Stream unlimited movies and TV shows on your phone, tablet, laptop,
+          and TV.
+        </p>
+      </div>
+      <div class="mockup">
+        <div class="screen three" aria-hidden="true"></div>
+      </div>
+    </section>
+    <!-- Browse rows -->
+    <section id="browse" class="browse" aria-label="Browse rows">
+      <div class="row">
+        <h3>Trending Now</h3>
+        <div class="cards">
+          <a class="card" href="#">
+            <div
+              class="poster"
+              style="background-image: url('https://picsum.photos/id/1011/600/338');"
+            ></div>
+            <div class="meta">
+              <span class="badge">16+</span>
+              <div class="actions">
+                <span class="btn">▶ Play</span>
+                <span class="btn">ⓘ More Info</span>
+              </div>
+            </div>
+          </a>
+          <a class="card" href="#">
+            <div
+              class="poster"
+              style="background-image: url('https://picsum.photos/id/1015/600/338');"
+            ></div>
+            <div class="meta">
+              <span class="badge">13+</span>
+              <div class="actions">
+                <span class="btn">▶ Play</span>
+                <span class="btn">ⓘ More Info</span>
+              </div>
+            </div>
+          </a>
+          <a class="card" href="#">
+            <div
+              class="poster"
+              style="background-image: url('https://picsum.photos/id/1025/600/338');"
+            ></div>
+            <div class="meta">
+              <span class="badge">U/A</span>
+              <div class="actions">
+                <span class="btn">▶ Play</span>
+                <span class="btn">ⓘ More Info</span>
+              </div>
+            </div>
+          </a>
+          <a class="card" href="#">
+            <div
+              class="poster"
+              style="background-image: url('https://picsum.photos/id/1005/600/338');"
+            ></div>
+            <div class="meta">
+              <span class="badge">A</span>
+              <div class="actions">
+                <span class="btn">▶ Play</span>
+                <span class="btn">ⓘ More Info</span>
+              </div>
+            </div>
+          </a>
+          <a class="card" href="#">
+            <div
+              class="poster"
+              style="background-image: url('https://picsum.photos/id/1019/600/338');"
+            ></div>
+            <div class="meta">
+              <span class="badge">7+</span>
+              <div class="actions">
+                <span class="btn">▶ Play</span>
+                <span class="btn">ⓘ More Info</span>
+              </div>
+            </div>
+          </a>
+          <a class="card" href="#">
+            <div
+              class="poster"
+              style="background-image: url('https://picsum.photos/id/1027/600/338');"
+            ></div>
+            <div class="meta">
+              <span class="badge">PG</span>
+              <div class="actions">
+                <span class="btn">▶ Play</span>
+                <span class="btn">ⓘ More Info</span>
+              </div>
+            </div>
+          </a>
+          <a class="card" href="#">
+            <div
+              class="poster"
+              style="background-image: url('https://picsum.photos/id/1039/600/338');"
+            ></div>
+            <div class="meta">
+              <span class="badge">16+</span>
+              <div class="actions">
+                <span class="btn">▶ Play</span>
+                <span class="btn">ⓘ More Info</span>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="row">
+        <h3>Top Picks for You</h3>
+        <div class="cards">
+          <a class="card" href="#">
+            <div
+              class="poster"
+              style="background-image: url('https://picsum.photos/id/1040/600/338');"
+            ></div>
+            <div class="meta">
+              <span class="badge">A</span>
+              <div class="actions">
+                <span class="btn">▶ Play</span>
+                <span class="btn">ⓘ More Info</span>
+              </div>
+            </div>
+          </a>
+          <a class="card" href="#">
+            <div
+              class="poster"
+              style="background-image: url('https://picsum.photos/id/1049/600/338');"
+            ></div>
+            <div class="meta">
+              <span class="badge">PG</span>
+              <div class="actions">
+                <span class="btn">▶ Play</span>
+                <span class="btn">ⓘ More Info</span>
+              </div>
+            </div>
+          </a>
+          <a class="card" href="#">
+            <div
+              class="poster"
+              style="background-image: url('https://picsum.photos/id/1050/600/338');"
+            ></div>
+            <div class="meta">
+              <span class="badge">U/A</span>
+              <div class="actions">
+                <span class="btn">▶ Play</span>
+                <span class="btn">ⓘ More Info</span>
+              </div>
+            </div>
+          </a>
+          <a class="card" href="#">
+            <div
+              class="poster"
+              style="background-image: url('https://picsum.photos/id/1067/600/338');"
+            ></div>
+            <div class="meta">
+              <span class="badge">13+</span>
+              <div class="actions">
+                <span class="btn">▶ Play</span>
+                <span class="btn">ⓘ More Info</span>
+              </div>
+            </div>
+          </a>
+          <a class="card" href="#">
+            <div
+              class="poster"
+              style="background-image: url('https://picsum.photos/id/1084/600/338');"
+            ></div>
+            <div class="meta">
+              <span class="badge">7+</span>
+              <div class="actions">
+                <span class="btn">▶ Play</span>
+                <span class="btn">ⓘ More Info</span>
+              </div>
+            </div>
+          </a>
+          <a class="card" href="#">
+            <div
+              class="poster"
+              style="background-image: url('https://picsum.photos/id/1081/600/338');"
+            ></div>
+            <div class="meta">
+              <span class="badge">16+</span>
+              <div class="actions">
+                <span class="btn">▶ Play</span>
+                <span class="btn">ⓘ More Info</span>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="row">
+        <h3>New Releases</h3>
+        <div class="cards">
+          <a class="card" href="#">
+            <div
+              class="poster"
+              style="background-image: url('https://picsum.photos/id/110/600/338');"
+            ></div>
+            <div class="meta">
+              <span class="badge">U/A</span>
+              <div class="actions">
+                <span class="btn">▶ Play</span>
+                <span class="btn">ⓘ More Info</span>
+              </div>
+            </div>
+          </a>
+          <a class="card" href="#">
+            <div
+              class="poster"
+              style="background-image: url('https://picsum.photos/id/119/600/338');"
+            ></div>
+            <div class="meta">
+              <span class="badge">PG</span>
+              <div class="actions">
+                <span class="btn">▶ Play</span>
+                <span class="btn">ⓘ More Info</span>
+              </div>
+            </div>
+          </a>
+          <a class="card" href="#">
+            <div
+              class="poster"
+              style="background-image: url('https://picsum.photos/id/181/600/338');"
+            ></div>
+            <div class="meta">
+              <span class="badge">A</span>
+              <div class="actions">
+                <span class="btn">▶ Play</span>
+                <span class="btn">ⓘ More Info</span>
+              </div>
+            </div>
+          </a>
+          <a class="card" href="#">
+            <div
+              class="poster"
+              style="background-image: url('https://picsum.photos/id/242/600/338');"
+            ></div>
+            <div class="meta">
+              <span class="badge">7+</span>
+              <div class="actions">
+                <span class="btn">▶ Play</span>
+                <span class="btn">ⓘ More Info</span>
+              </div>
+            </div>
+          </a>
+          <a class="card" href="#">
+            <div
+              class="poster"
+              style="background-image: url('https://picsum.photos/id/300/600/338');"
+            ></div>
+            <div class="meta">
+              <span class="badge">13+</span>
+              <div class="actions">
+                <span class="btn">▶ Play</span>
+                <span class="btn">ⓘ More Info</span>
+              </div>
+            </div>
+          </a>
+          <a class="card" href="#">
+            <div
+              class="poster"
+              style="background-image: url('https://picsum.photos/id/367/600/338');"
+            ></div>
+            <div class="meta">
+              <span class="badge">U/A</span>
+              <div class="actions">
+                <span class="btn">▶ Play</span>
+                <span class="btn">ⓘ More Info</span>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+    <!-- Footer -->
+    <footer>
+      <div class="fgrid">
+        <div>
+          <a href="#">FAQ</a>
+          <a href="#">Investor Relations</a>
+          <a href="#">Privacy</a>
+          <a href="#">Speed Test</a>
+        </div>
+        <div>
+          <a href="#">Help Center</a>
+          <a href="#">Jobs</a>
+          <a href="#">Cookie Preferences</a>
+          <a href="#">Legal Notices</a>
+        </div>
+        <div>
+          <a href="#">Account</a>
+          <a href="#">Ways to Watch</a>
+          <a href="#">Corporate Information</a>
+          <a href="#">Only on Netflix</a>
+        </div>
+        <div>
+          <a href="#">Media Center</a>
+          <a href="#">Terms of Use</a>
+          <a href="#">Contact Us</a>
+        </div>
+      </div>
+      <div class="copy">Netflix Pakistan</div>
+    </footer>
+  </body>
+</html>
